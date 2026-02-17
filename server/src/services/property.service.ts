@@ -112,7 +112,7 @@ export const getFilteredProperties = async (filters: PropertyFilters) => {
   if (filters.latitude !== undefined && filters.longitude !== undefined) {
     const RADIUS_KM = 50
     const radiusMeters = RADIUS_KM * 1000
-    
+
     const nearbyLocationIds: { id: number }[] = await prisma.$queryRaw`
       SELECT id
       FROM "Location"
@@ -122,14 +122,16 @@ export const getFilteredProperties = async (filters: PropertyFilters) => {
         ${radiusMeters}
       )
     `
-    
-    const locationIds = nearbyLocationIds.map(loc => loc.id)
-    
-    properties = properties.filter(p => locationIds.includes(p.locationId))
+
+    const locationIds = nearbyLocationIds.map((loc) => loc.id)
+
+    properties = properties.filter((p: { locationId: number }) =>
+      locationIds.includes(p.locationId)
+    )
   }
 
   const propertiesWithCoordinates = await Promise.all(
-    properties.map(async (property) => {
+    properties.map(async (property: any) => {
       const coordinates: { coordinates: string }[] =
         await prisma.$queryRaw`SELECT ST_asText(coordinates) as coordinates FROM "Location" WHERE id = ${property.location.id}`
 
