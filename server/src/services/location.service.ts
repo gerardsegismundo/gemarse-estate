@@ -1,4 +1,14 @@
-import { PrismaClient, Location } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
+
+type Location = {
+  id: number
+  address: string
+  city: string
+  state: string
+  country: string
+  postalCode: string
+  coordinates: any
+}
 
 const prisma = new PrismaClient()
 
