@@ -33,7 +33,7 @@ export const getCurrentResidencesForTenant = async (cognitoId: string) => {
   })
 
   const formattedProperties = await Promise.all(
-    properties.map((p) => propertyService.getPropertyById(p.id))
+    properties.map((p: any) => propertyService.getPropertyById(p.id))
   )
 
   return formattedProperties.filter(Boolean)
@@ -46,7 +46,7 @@ export const addFavoriteProperty = async (
   const tenant = await getTenantByCognitoId(cognitoId)
   if (!tenant) return null
 
-  if (tenant.favorites.some((f) => f.id === propertyId)) return 'exists'
+  if (tenant.favorites.some((f: any) => f.id === propertyId)) return 'exists'
 
   return prisma.tenant.update({
     where: { cognitoId },

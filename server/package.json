@@ -9,7 +9,8 @@
     "dev:kill": "npx kill-port 8000 && nodemon --exec ts-node src/index.ts",
     "seed": "ts-node prisma/seed.ts",
     "prisma:generate": "prisma generate",
-    "postprisma:generate": "shx cp -r node_modules/.prisma/client/index.d.ts ../client/src/types/prismaTypes.d.ts"
+    "postprisma:generate": "shx cp -r node_modules/.prisma/client/index.d.ts ../client/src/types/prismaTypes.d.ts",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",

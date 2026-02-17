@@ -27,7 +27,7 @@ export const auth = (allowedRoles: string[]) => {
     }
 
     try {
-      const decoded = jwt.decode(token) as DecodedToken
+      const decoded = jwt.verify(token, process.env.JWT_SECRET!) as DecodedToken
       const userRole = decoded['custom:role'] || ''
       req.user = {
         id: decoded.sub,
