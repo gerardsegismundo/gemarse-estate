@@ -1,0 +1,49 @@
+# ========================
+# Node / Dependencies
+# ========================
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# ========================
+# Build / Output Folders
+# ========================
+dist/
+client/dist/
+server/dist/
+client/.next/
+server/.next/          
+
+# ========================
+# Environment / Secrets
+# ========================
+*.env
+client/.env*
+server/.env*
+
+# ========================
+# Logs
+# ========================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ========================
+# OS / Editor / IDE
+# ========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ========================
+# TypeScript / Cache
+# ========================
+*.tsbuildinfo
+.cache/
+.next/cache/
+
+# ========================
+# Misc / Notes
+# ========================
+notes.txt
