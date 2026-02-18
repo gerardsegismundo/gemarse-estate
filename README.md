@@ -4,6 +4,8 @@
   <img src="https://raw.githubusercontent.com/gerardsegismundo/gemarse-estate/main/client/public/icon.svg" alt="Gemarse Estate Logo" width="150" height="150"/>
 </p>
 
+**Live Demo:** [https://main.d2mesgux8km4a1.amplifyapp.com/](https://main.d2mesgux8km4a1.amplifyapp.com/)
+
 The Pinnacle of Modern Living — A full-stack, luxury real estate rental and management platform designed for seamless property discovery, management, and residency experience.
 
 Gemarse Estate combines minimalist, high-end design with robust functionality for both Tenants and Managers, providing an elegant, intuitive platform to browse, manage, and apply to rental properties.
