@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { Great_Vibes } from 'next/font/google'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from './ui/button'
 import { useGetAuthUserQuery, api } from '@/state/api'
 import { useAppDispatch } from '@/state/redux'
@@ -72,14 +73,30 @@ const Navbar = () => {
       <div className='mx-auto flex justify-between items-center px-8'>
         {/* Logo Section */}
         <Link href='/' className='cursor-pointer group'>
-          <div
-            className={`${logoFont.className} text-5xl transition-all duration-300 ${
-              isSolid
-                ? 'text-zinc-900'
-                : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]'
-            }`}
-          >
-            Gemarse Estate
+          {/* Desktop: Text Logo */}
+          <div className='hidden md:block'>
+            <div
+              className={`${logoFont.className} text-5xl transition-all duration-300 ${
+                isSolid
+                  ? 'text-zinc-900'
+                  : 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]'
+              }`}
+            >
+              Gemarse Estate
+            </div>
+          </div>
+          {/* Mobile: Icon Logo */}
+          <div className='block md:hidden relative w-10 h-10'>
+            <Image
+              src='/icon.svg'
+              alt='Gemarse Estate Logo'
+              fill
+              className={`object-contain transition-all duration-300 ${
+                isSolid
+                  ? 'brightness-0'
+                  : 'brightness-0 invert drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]'
+              }`}
+            />
           </div>
         </Link>
 
