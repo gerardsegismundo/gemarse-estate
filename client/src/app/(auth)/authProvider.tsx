@@ -27,10 +27,21 @@ Amplify.configure({
 const components = {
   Header() {
     return (
-      <View className='text-center'>
+      <View className='text-center relative'>
+        <Link
+          href='/'
+          style={{
+            position: 'absolute',
+            top: '-3.25rem',
+            left: '-2rem',
+          }}
+          className='absolute left-0 top-2 text-[10px] uppercase tracking-[0.3em] text-zinc-400 hover:text-zinc-900 transition-colors flex items-center gap-1'
+        >
+          <span className='text-sm'>←</span> Home
+        </Link>
         <Heading
           level={3}
-          className='!text-3xl !font-thin !tracking-tight !text-zinc-900'
+          className='!text-3xl !font-thin !tracking-tight !text-zinc-900 pt-10'
         >
           Gemarse&nbsp;
           <span className='italic font-light text-zinc-400'>Estate</span>
@@ -100,7 +111,6 @@ const components = {
   },
 }
 
-// --- Form Field Overrides ---
 const formFields = {
   signIn: {
     username: {
@@ -147,7 +157,6 @@ const formFields = {
   },
 }
 
-// --- Auth Wrapper Component ---
 const Auth = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuthenticator((ctx) => [ctx.user])
   const router = useRouter()
@@ -167,7 +176,7 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
   if (!isAuthPage && !isDashboardPage) return <>{children}</>
 
   return (
-    <div className='h-full flex items-center justify-center bg-[#fafafa]'>
+    <div className='min-h-screen flex items-center justify-center bg-[#fafafa] py-12 px-4'>
       <Authenticator
         initialState={initialState}
         components={components}

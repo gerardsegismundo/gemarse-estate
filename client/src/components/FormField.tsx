@@ -67,12 +67,10 @@ export const CustomFormField: React.FC<FormFieldProps> = ({
   type = 'text',
   placeholder,
   options,
-  accept,
   className,
   inputClassName,
   labelClassName,
   disabled = false,
-  multiple = false,
   isIcon = false,
   initialValue,
 }) => {
