@@ -1,78 +1,100 @@
-# Gemarse Estate
+# Gemarse Estate 🏛️
 
-A modern real estate rental platform built with Next.js, Express, PostgreSQL, and AWS.
+The Pinnacle of Modern Living — A full-stack, luxury real estate rental and management platform designed for seamless property discovery, management, and residency experience.
 
-## Features
+Gemarse Estate combines minimalist, high-end design with robust functionality for both Tenants and Managers, providing an elegant, intuitive platform to browse, manage, and apply to rental properties.
 
-- **Property Listings**: Browse available rental properties with advanced filtering
-- **User Authentication**: Sign up and login with AWS Cognito
-- **Role-based Access**: Separate dashboards for Tenants and Managers
-- **Property Management**: Managers can create and manage property listings
-- **Application System**: Tenants can apply to properties
-- **Favorites**: Tenants can save favorite properties
-- **Map Integration**: View properties on an interactive map (Mapbox)
-- **Responsive Design**: Works on desktop and mobile devices
+## 📋 Overview
 
-## Tech Stack
+Gemarse Estate is built with a focus on luxury UI/UX, performance, and maintainable architecture. Tenants can discover and favorite properties with advanced search filters, while Managers can efficiently handle listings, applications, and unit assignments.
+
+The platform features a role-based access control system (RBAC) and a customized authentication flow, ensuring a seamless and secure experience for every user.
+
+## 🚀 Tech Stack
 
 ### Frontend
 
-- **Next.js 15** - React framework
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **Redux Toolkit** - State management
-- **AWS Amplify** - Authentication
-- **Mapbox GL** - Maps
-- **Framer Motion** - Animations
-- **Radix UI** - UI components
+- **Next.js 15** — React framework with App Router
+- **TypeScript** — Type safety across the app
+- **Tailwind CSS** — Utility-first styling
+- **Redux Toolkit & RTK Query** — State management and data fetching
+- **Shadcn UI & Radix Primitives** — Accessible, reusable components
+- **Lucide React** — Lightweight icons
+- **Framer Motion** — Smooth animations
+- **Mapbox GL** — Interactive property maps
 
 ### Backend
 
-- **Express.js** - API server
-- **PostgreSQL** - Database
-- **Prisma** - ORM
-- **AWS S3** - File storage
-- **JWT** - Authentication
+- **Express.js** — API server
+- **PostgreSQL** — Relational database
+- **Prisma** — ORM for database interactions
+- **AWS S3** — File storage for property images
+- **AWS Amplify Auth (Cognito)** — Authentication and user management
+- **JWT** — Secure API authentication
 
-## Prerequisites
+## ✨ Key Features
+
+### For Tenants
+
+- **Property Discovery**: Browse high-end listings with filters by location, price, size, and amenities
+- **Favorites**: Save properties for later
+- **Application System**: Apply to properties directly via the platform
+- **Profile Management**: Manage personal information and rental history
+- **Responsive Design**: Optimized for desktop and mobile
+
+### For Managers
+
+- **Dashboard**: Overview of properties, applications, and tenants
+- **Property Management**: Create, update, and remove listings
+- **Application Tracking**: Approve or reject tenant applications
+- **Role-Based Access**: Manage user permissions for staff and tenants
+
+### Luxury UI/UX
+
+- Minimalist design with high-contrast serif typography (Didot/Bodoni inspired)
+- Smooth animations and transitions
+- Dynamic navigation that adapts to scrolling and context
+- Custom-branded authentication experience
+
+## 🏗️ Prerequisites
 
 - Node.js 18+
 - PostgreSQL database
 - AWS Account (Cognito, S3)
 - Mapbox API key
 
-## Installation
+## ⚡ Installation
 
-1. Clone the repository:
+Clone the repository:
 
 ```bash
 git clone https://github.com/gerardsegismundo/gemarse-estate.git
 cd gemarse-estate
 ```
 
-2. Install dependencies:
+Install dependencies:
 
 ```bash
 # Root dependencies
 npm install
 
-# Client dependencies
+# Frontend dependencies
 cd client && npm install
 
-# Server dependencies
+# Backend dependencies
 cd ../server && npm install
 ```
 
-3. Set up environment variables:
+Set up environment variables:
 
-Create `client/.env`:
+**client/.env:**
 
 ```env
 NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
 NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=your_mapbox_token
 ```
 
-Create `server/.env`:
+**server/.env:**
 
 ```env
 PORT=8000
@@ -84,7 +106,7 @@ AWS_SECRET_ACCESS_KEY=your_aws_secret
 S3_BUCKET_NAME=your_s3_bucket
 ```
 
-4. Set up the database:
+Initialize the database:
 
 ```bash
 cd server
@@ -92,17 +114,17 @@ npx prisma migrate dev
 npx prisma db seed
 ```
 
-## Running the Application
+## 🖥️ Running the Application
 
 ### Development Mode
 
-Run both client and server:
+Run both client and server concurrently:
 
 ```bash
 npm run dev
 ```
 
-Or run separately:
+Or separately:
 
 ```bash
 # Terminal 1 - Server
@@ -112,8 +134,8 @@ npm run dev:server
 npm run dev:client
 ```
 
-- Client: http://localhost:3000
-- Server: http://localhost:8000
+- **Client:** http://localhost:3000
+- **Server:** http://localhost:8000
 
 ### Production Build
 
@@ -122,66 +144,76 @@ npm run build
 npm run start
 ```
 
-## Project Structure
+## 🗂️ Project Structure
 
 ```
 ├── client/                 # Next.js frontend
 │   ├── src/
 │   │   ├── app/           # App router pages
-│   │   │   ├── (auth)/    # Auth pages
-│   │   │   ├── (dashboard)/ # Dashboard pages
-│   │   │   ├── (nondashboard)/ # Public pages
-│   │   │   └── search/    # Property search
-│   │   ├── components/    # React components
-│   │   ├── hooks/        # Custom hooks
-│   │   ├── lib/          # Utilities
-│   │   ├── state/        # Redux store
+│   │   │   ├── (auth)/   # Authentication
+│   │   │   ├── (dashboard)/ # Manager & Tenant dashboards
+│   │   │   ├── (nondashboard)/ # Landing & public pages
+│   │   │   └── search/   # Property search
+│   │   ├── components/   # Reusable components
+│   │   ├── hooks/        # Custom React hooks
+│   │   ├── lib/          # Utilities & helpers
+│   │   ├── state/        # Redux store & slices
 │   │   └── types/        # TypeScript types
 │   └── public/           # Static assets
 │
-├── server/                 # Express API
+├── server/                # Express backend
 │   ├── src/
-│   │   ├── controllers/  # Route controllers
-│   │   ├── middleware/   # Express middleware
-│   │   ├── routes/       # API routes
+│   │   ├── controllers/  # Route handlers
+│   │   ├── middleware/   # Auth & other middleware
+│   │   ├── routes/       # API endpoints
 │   │   └── services/     # Business logic
 │   └── prisma/           # Database schema
 │
-└── package.json           # Root scripts
+└── package.json          # Root scripts
 ```
 
-## API Endpoints
+## 📡 API Endpoints
 
 ### Properties
 
-- `GET /properties` - List all properties
-- `GET /properties/:id` - Get property details
-- `POST /properties` - Create property (Manager only)
+| Method | Endpoint          | Description                    |
+| ------ | ----------------- | ------------------------------ |
+| GET    | `/properties`     | List all properties            |
+| GET    | `/properties/:id` | Get property details           |
+| POST   | `/properties`     | Create property (Manager only) |
 
 ### Applications
 
-- `GET /applications` - List applications
-- `POST /applications` - Submit application
-- `PUT /applications/:id/status` - Update status (Manager only)
+| Method | Endpoint                   | Description                  |
+| ------ | -------------------------- | ---------------------------- |
+| GET    | `/applications`            | List applications            |
+| POST   | `/applications`            | Submit application           |
+| PUT    | `/applications/:id/status` | Update status (Manager only) |
 
 ### Tenants
 
-- `GET /tenants/:id` - Get tenant profile
-- `PUT /tenants/:id` - Update tenant settings
-- `POST /tenants/:id/favorites/:propertyId` - Add favorite
+| Method | Endpoint                             | Description            |
+| ------ | ------------------------------------ | ---------------------- |
+| GET    | `/tenants/:id`                       | Get tenant profile     |
+| PUT    | `/tenants/:id`                       | Update tenant settings |
+| POST   | `/tenants/:id/favorites/:propertyId` | Add favorite           |
 
 ### Managers
 
-- `GET /managers/:id` - Get manager profile
-- `GET /managers/:id/properties` - Get manager's properties
+| Method | Endpoint                   | Description              |
+| ------ | -------------------------- | ------------------------ |
+| GET    | `/managers/:id`            | Get manager profile      |
+| GET    | `/managers/:id/properties` | Get manager's properties |
 
-## Scripts
+## 🛠️ Scripts
 
-- `npm run dev` - Start development servers
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run seed` - Seed database (server)
+| Script          | Description                          |
+| --------------- | ------------------------------------ |
+| `npm run dev`   | Start client & server in development |
+| `npm run build` | Build production client              |
+| `npm run start` | Start production server              |
+| `npm run seed`  | Seed the database                    |
 
-## License
+## 📜 License
 
 ISC
