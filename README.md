@@ -12,6 +12,16 @@ Gemarse Estate is built with a focus on luxury UI/UX, performance, and maintaina
 
 The platform features a role-based access control system (RBAC) and a customized authentication flow, ensuring a seamless and secure experience for every user.
 
+## 📸 Screenshots
+
+### Landing Page
+
+![Landing Page](client/public/screenshot_landing-page.png)
+
+### Search Page
+
+![Search Page](client/public/screenshot_search-page.png)
+
 ## 🚀 Tech Stack
 
 ### Frontend
