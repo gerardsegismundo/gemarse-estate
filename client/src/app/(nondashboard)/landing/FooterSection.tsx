@@ -34,7 +34,7 @@ const FooterSection = () => {
   }
 
   return (
-    <footer className='bg-white border-t border-zinc-100 pt-24 pb-12'>
+    <footer className='bg-white border-t border-zinc-100 pt-24'>
       <div className='max-w-7xl mx-auto px-6'>
         {/* Central Branding Section */}
         <div className='flex flex-col items-center mb-16'>
@@ -105,30 +105,27 @@ const FooterSection = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className='pt-8 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-[0.2em] text-zinc-400'>
-          <p className='font-medium'>
-            © {new Date().getFullYear()} Gemarse Estate. All rights reserved.
-          </p>
-          <div className='flex gap-10'>
-            <Link
-              href='/privacy'
-              className='hover:text-zinc-900 transition-colors'
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href='/terms'
-              className='hover:text-zinc-900 transition-colors'
-            >
-              Terms of Use
-            </Link>
-            <Link
-              href='/cookies'
-              className='hover:text-zinc-900 transition-colors'
-            >
-              Cookie Settings
-            </Link>
-          </div>
+      </div>
+      <div className='p-6 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-[0.2em] text-zinc-400'>
+        <p className='font-medium'>
+          © {new Date().getFullYear()} Gemarse Estate. All rights reserved.
+        </p>
+        <div className='flex gap-10'>
+          <Link
+            href='/privacy'
+            className='hover:text-zinc-900 transition-colors'
+          >
+            Privacy Policy
+          </Link>
+          <Link href='/terms' className='hover:text-zinc-900 transition-colors'>
+            Terms of Use
+          </Link>
+          <Link
+            href='/cookies'
+            className='hover:text-zinc-900 transition-colors'
+          >
+            Cookie Settings
+          </Link>
         </div>
       </div>
     </footer>
