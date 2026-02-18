@@ -1,9 +1,5 @@
 # Gemarse Estate 🏛️
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/gerardsegismundo/gemarse-estate/main/client/public/readmeicon.svg" alt="Gemarse Estate Logo" width="150" height="150"/>
-</p>
-
 **Live Demo:** [https://main.d2mesgux8km4a1.amplifyapp.com/](https://main.d2mesgux8km4a1.amplifyapp.com/)
 
 The Pinnacle of Modern Living — A full-stack, luxury real estate rental and management platform designed for seamless property discovery, management, and residency experience.
