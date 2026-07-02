@@ -1,0 +1,148 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  CloudFormation stack for Gemarse Estate resources.
+  Creates an S3 bucket, Cognito User Pool, User Pool Client, and IAM user with S3 access.
+
+Parameters:
+  EnvironmentName:
+    Type: String
+    Default: dev
+    Description: Deployment environment identifier.
+
+Resources:
+  GemarseEstateS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'gemarse-estate-${EnvironmentName}-${AWS::AccountId}'
+      AccessControl: Private
+      VersioningConfiguration:
+        Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  GemarseEstateS3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref GemarseEstateS3Bucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: '*'
+            Action:
+              - 's3:PutObject'
+              - 's3:GetObject'
+              - 's3:DeleteObject'
+            Resource: !Sub '${GemarseEstateS3Bucket.Arn}/*'
+            Condition:
+              StringEquals:
+                'aws:PrincipalArn': !Sub 'arn:aws:iam::${AWS::AccountId}:user/GemarseEstateS3Uploader'
+
+  GemarseEstateCognitoUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: !Sub 'gemarse-estate-${EnvironmentName}-user-pool'
+      AutoVerifiedAttributes:
+        - email
+      UsernameAttributes:
+        - email
+      Schema:
+        - Name: email
+          Required: true
+          Mutable: true
+        - Name: name
+          Required: true
+          Mutable: true
+        - Name: custom:role
+          Required: true
+          Mutable: true
+          AttributeDataType: String
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 8
+          RequireLowercase: true
+          RequireUppercase: true
+          RequireNumbers: true
+          RequireSymbols: false
+      MfaConfiguration: OFF
+      UsernameConfiguration:
+        CaseSensitive: false
+
+  GemarseEstateCognitoUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      ClientName: !Sub 'gemarse-estate-${EnvironmentName}-client'
+      UserPoolId: !Ref GemarseEstateCognitoUserPool
+      GenerateSecret: false
+      ExplicitAuthFlows:
+        - ALLOW_USER_PASSWORD_AUTH
+        - ALLOW_REFRESH_TOKEN_AUTH
+        - ALLOW_CUSTOM_AUTH
+      SupportedIdentityProviders:
+        - COGNITO
+      PreventUserExistenceErrors: ENABLED
+      RefreshTokenValidity: 30
+      AccessTokenValidity: 60
+      IdTokenValidity: 60
+
+  GemarseEstateS3UploaderPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: !Sub 'gemarse-estate-${EnvironmentName}-s3-uploader-policy'
+      Roles: []
+      Users:
+        - !Ref GemarseEstateS3UploaderUser
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 's3:PutObject'
+              - 's3:GetObject'
+              - 's3:DeleteObject'
+            Resource: !Sub '${GemarseEstateS3Bucket.Arn}/*'
+
+  GemarseEstateS3UploaderUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: !Sub 'GemarseEstateS3Uploader-${EnvironmentName}'
+      Policies:
+        - PolicyName: !Sub 'gemarse-estate-${EnvironmentName}-s3-uploader-inline-policy'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 's3:PutObject'
+                  - 's3:GetObject'
+                  - 's3:DeleteObject'
+                Resource: !Sub '${GemarseEstateS3Bucket.Arn}/*'
+
+  GemarseEstateS3UploaderAccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName: !Ref GemarseEstateS3UploaderUser
+
+Outputs:
+  S3BucketName:
+    Description: Name of the S3 bucket for property uploads.
+    Value: !Ref GemarseEstateS3Bucket
+
+  CognitoUserPoolId:
+    Description: Cognito User Pool ID.
+    Value: !Ref GemarseEstateCognitoUserPool
+
+  CognitoUserPoolClientId:
+    Description: Cognito User Pool client ID.
+    Value: !Ref GemarseEstateCognitoUserPoolClient
+
+  S3UploaderUserName:
+    Description: IAM user created for S3 upload access.
+    Value: !Ref GemarseEstateS3UploaderUser
+
+  S3UploaderAccessKeyId:
+    Description: Access Key ID for the S3 uploader IAM user.
+    Value: !Ref GemarseEstateS3UploaderAccessKey
