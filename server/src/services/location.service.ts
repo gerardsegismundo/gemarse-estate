@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../lib/prisma'
 
 type Location = {
   id: number
@@ -9,8 +9,6 @@ type Location = {
   postalCode: string
   coordinates: any
 }
-
-const prisma = new PrismaClient()
 
 export const createLocation = async (
   address: string,

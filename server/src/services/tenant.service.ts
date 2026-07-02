@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client'
-import * as propertyService from './property.service' // import your property service
-
-const prisma = new PrismaClient()
+import { prisma } from '../lib/prisma'
+import * as propertyService from './property.service'
 
 export const getTenantByCognitoId = async (cognitoId: string) => {
   return prisma.tenant.findUnique({

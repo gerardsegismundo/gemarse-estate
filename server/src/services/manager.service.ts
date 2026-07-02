@@ -1,6 +1,6 @@
 // services/manager.service.ts
 import { prisma } from '../lib/prisma'
-import { wktToGeoJSON } from '@terraformer/wkt'
+import { fetchCoordinatesById } from '../utils/coordinates'
 
 export type ManagerCreateData = {
   cognitoId: string
@@ -49,15 +49,9 @@ export const fetchManagerProperties = async (cognitoId: string) => {
     include: { location: true },
   })
 
-  // Get coordinates for each property using raw SQL
   const propertiesWithCoordinates = await Promise.all(
     properties.map(async (property) => {
-      const coordinates: { coordinates: string }[] =
-        await prisma.$queryRaw`SELECT ST_asText(coordinates) as coordinates FROM "Location" WHERE id = ${property.location.id}`
-
-      const geoJSON: any = wktToGeoJSON(coordinates[0]?.coordinates || '')
-      const longitude = geoJSON.coordinates?.[0]
-      const latitude = geoJSON.coordinates?.[1]
+      const { longitude, latitude } = await fetchCoordinatesById(property.location.id)
 
       return {
         ...property,

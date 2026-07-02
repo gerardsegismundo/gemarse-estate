@@ -1,12 +1,6 @@
 import { Request, Response } from 'express'
 import * as tenantService from '../services/tenant.service'
-
-const handleNotFound = (res: Response, message: string) =>
-  res.status(404).json({ message })
-const handleError = (res: Response, error: any, prefix = '') =>
-  res.status(500).json({
-    message: `${prefix}${error instanceof Error ? error.message : 'Unknown error'}`,
-  })
+import { handleError, handleNotFound } from '../utils/error'
 
 export const getTenant = async (
   req: Request<{ cognitoId: string }>,

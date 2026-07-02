@@ -1,11 +1,10 @@
 // services/property.service.ts
-import { PrismaClient, Prisma } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
 import { uploadFilesToS3 } from './s3.service'
 import { getCoordinatesFromAddress } from './geocode.service'
 import { createLocation } from './location.service'
-import { wktToGeoJSON } from '@terraformer/wkt'
-
-const prisma = new PrismaClient()
+import { fetchCoordinatesById } from '../utils/coordinates'
+import { prisma } from '../lib/prisma'
 
 export type PropertyInput = {
   files: Express.Multer.File[]
@@ -41,12 +40,7 @@ export const getPropertyById = async (id: number) => {
 
   if (!property) return null
 
-  const coordinates: { coordinates: string }[] =
-    await prisma.$queryRaw`SELECT ST_asText(coordinates) as coordinates FROM "Location" WHERE id = ${property.location.id}`
-
-  const geoJSON: any = wktToGeoJSON(coordinates[0]?.coordinates || '')
-  const longitude = geoJSON.coordinates[0]
-  const latitude = geoJSON.coordinates[1]
+  const { longitude, latitude } = await fetchCoordinatesById(property.location.id)
 
   return {
     ...property,
@@ -132,12 +126,7 @@ export const getFilteredProperties = async (filters: PropertyFilters) => {
 
   const propertiesWithCoordinates = await Promise.all(
     properties.map(async (property: any) => {
-      const coordinates: { coordinates: string }[] =
-        await prisma.$queryRaw`SELECT ST_asText(coordinates) as coordinates FROM "Location" WHERE id = ${property.location.id}`
-
-      const geoJSON: any = wktToGeoJSON(coordinates[0]?.coordinates || '')
-      const longitude = geoJSON.coordinates[0]
-      const latitude = geoJSON.coordinates[1]
+      const { longitude, latitude } = await fetchCoordinatesById(property.location.id)
 
       return {
         ...property,

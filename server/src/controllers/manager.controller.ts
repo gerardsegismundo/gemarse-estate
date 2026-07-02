@@ -1,19 +1,18 @@
 import { Request, Response } from 'express'
 import * as managerService from '../services/manager.service'
+import { handleError, handleNotFound, handleUnauthorized, handleConflict } from '../utils/error'
 
 export const getManager = async (req: Request, res: Response) => {
   try {
     const cognitoId = req.user?.id
-    if (!cognitoId) return res.status(401).json({ message: 'Unauthorized' })
+    if (!cognitoId) return handleUnauthorized(res, 'Unauthorized')
 
     const manager = await managerService.fetchManager(cognitoId)
-    if (!manager) return res.status(404).json({ message: 'Manager not found' })
+    if (!manager) return handleNotFound(res, 'Manager not found')
 
     res.json(manager)
-  } catch (err: any) {
-    res
-      .status(500)
-      .json({ message: `Error retrieving manager: ${err.message}` })
+  } catch (error) {
+    handleError(res, error, 'Error retrieving manager: ')
   }
 }
 
@@ -33,10 +32,9 @@ export const createManager = async (
       phoneNumber,
     })
     res.status(201).json(manager)
-  } catch (err: any) {
-    if (err.code === 'P2002')
-      return res.status(409).json({ message: 'Manager already exists' })
-    res.status(500).json({ message: `Error creating manager: ${err.message}` })
+  } catch (error: any) {
+    if (error.code === 'P2002') return handleConflict(res, 'Manager already exists')
+    handleError(res, error, 'Error creating manager: ')
   }
 }
 
@@ -46,28 +44,26 @@ export const updateManager = async (
 ) => {
   try {
     const cognitoId = req.user?.id
-    if (!cognitoId) return res.status(401).json({ message: 'Unauthorized' })
+    if (!cognitoId) return handleUnauthorized(res, 'Unauthorized')
 
     const existing = await managerService.fetchManager(cognitoId)
-    if (!existing) return res.status(404).json({ message: 'Manager not found' })
+    if (!existing) return handleNotFound(res, 'Manager not found')
 
     const updated = await managerService.updateManager(cognitoId, req.body)
     res.json(updated)
-  } catch (err: any) {
-    res.status(500).json({ message: `Error updating manager: ${err.message}` })
+  } catch (error) {
+    handleError(res, error, 'Error updating manager: ')
   }
 }
 
 export const getManagerProperties = async (req: Request, res: Response) => {
   try {
     const cognitoId = req.user?.id
-    if (!cognitoId) return res.status(401).json({ message: 'Unauthorized' })
+    if (!cognitoId) return handleUnauthorized(res, 'Unauthorized')
 
     const properties = await managerService.fetchManagerProperties(cognitoId)
     res.json(properties)
-  } catch (err: any) {
-    res
-      .status(500)
-      .json({ message: `Error retrieving properties: ${err.message}` })
+  } catch (error) {
+    handleError(res, error, 'Error retrieving properties: ')
   }
 }

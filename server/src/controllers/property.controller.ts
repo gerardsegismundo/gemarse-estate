@@ -6,16 +6,17 @@ import {
   PropertyFilters,
   createPropertyWithLocationAndPhotos,
 } from '../services/property.service'
+import { handleError, handleNotFound } from '../utils/error'
 
 export const getProperty = async (req: Request, res: Response) => {
   const { id } = req.params
   try {
     const property = await getPropertyById(Number(id))
     if (!property)
-      return res.status(404).json({ message: 'Property not found' })
+      return handleNotFound(res, 'Property not found')
     res.json(property)
-  } catch (err: any) {
-    res.status(500).json({ message: err.message })
+  } catch (error) {
+    handleError(res, error)
   }
 }
 
@@ -58,8 +59,8 @@ export const getProperties = async (req: Request, res: Response) => {
   try {
     const properties = await getFilteredProperties(filters)
     res.json(properties)
-  } catch (err: any) {
-    res.status(500).json({ message: err.message })
+  } catch (error) {
+    handleError(res, error)
   }
 }
 
@@ -77,7 +78,7 @@ export const createProperty = async (req: Request, res: Response) => {
     })
 
     res.status(201).json(newProperty)
-  } catch (err: any) {
-    res.status(500).json({ message: err.message })
+  } catch (error) {
+    handleError(res, error)
   }
 }

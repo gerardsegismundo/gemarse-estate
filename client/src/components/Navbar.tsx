@@ -9,15 +9,7 @@ import { useGetAuthUserQuery, api } from '@/state/api'
 import { useAppDispatch } from '@/state/redux'
 import { useRouter, usePathname } from 'next/navigation'
 import { signOut, fetchAuthSession } from 'aws-amplify/auth'
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from './ui/dropdown-menu'
-import { Avatar, AvatarFallback } from './ui/avatar'
+import UserMenu from './features/auth/UserMenu'
 
 const logoFont = Great_Vibes({ weight: '400', subsets: ['latin'] })
 
@@ -50,7 +42,6 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
     }
-
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -71,9 +62,7 @@ const Navbar = () => {
       }`}
     >
       <div className='mx-auto flex justify-between items-center px-8'>
-        {/* Logo Section */}
         <Link href='/' className='cursor-pointer group'>
-          {/* Desktop: Text Logo */}
           <div className='hidden md:block'>
             <div
               className={`${logoFont.className} text-5xl transition-all duration-300 ${
@@ -85,7 +74,6 @@ const Navbar = () => {
               Gemarse Estate
             </div>
           </div>
-          {/* Mobile: Icon Logo */}
           <div className='block md:hidden relative w-10 h-10'>
             <Image
               src='/icon.svg'
@@ -100,7 +88,6 @@ const Navbar = () => {
           </div>
         </Link>
 
-        {/* Tagline - visible only on home */}
         {isHomePage && (
           <p
             className={`hidden md:block text-[12px] uppercase tracking-[0.5em] font-medium transition-colors duration-300 ${
@@ -112,7 +99,6 @@ const Navbar = () => {
         )}
 
         <div className='flex items-center gap-6'>
-          {/* Search Button */}
           <Link
             href='/search'
             className='group relative py-2 hidden sm:flex items-center gap-2 mr-2'
@@ -132,65 +118,7 @@ const Navbar = () => {
           </Link>
 
           {isLoading ? null : isLoggedIn ? (
-            <div className='flex items-center gap-4'>
-              <DropdownMenu>
-                <DropdownMenuTrigger className='flex items-center gap-4 focus:outline-none group'>
-                  {/* Name Only - Role Removed for clean look */}
-                  <div className='hidden md:block'>
-                    <span
-                      className={`text-[12px] uppercase tracking-widest font-bold transition-colors ${
-                        isSolid ? 'text-zinc-800' : 'text-white'
-                      }`}
-                    >
-                      {userName}
-                    </span>
-                  </div>
-
-                  {/* Rounded Avatar with initials fix */}
-                  <Avatar className='h-9 w-9 rounded-full transition-all duration-300 group-hover:border-zinc-400 border border-transparent overflow-hidden'>
-                    <AvatarFallback className='bg-zinc-900 text-white text-[12px] font-bold flex items-center justify-center w-full h-full'>
-                      {userName[0].toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                </DropdownMenuTrigger>
-
-                <DropdownMenuContent
-                  align='end'
-                  className='w-52 mt-4 border-zinc-100 p-1 shadow-2xl bg-white'
-                >
-                  <DropdownMenuItem
-                    onClick={() =>
-                      router.push(
-                        userRole.toLowerCase() === 'manager'
-                          ? '/managers/properties'
-                          : '/tenants/favorites'
-                      )
-                    }
-                    className='text-[12px] uppercase tracking-widest cursor-pointer py-3 focus:bg-zinc-50 focus:text-zinc-900'
-                  >
-                    Go to Dashboard
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem
-                    onClick={() =>
-                      router.push(`/${userRole.toLowerCase()}s/settings`)
-                    }
-                    className='text-[12px] uppercase tracking-widest cursor-pointer py-3 focus:bg-zinc-50 focus:text-zinc-900'
-                  >
-                    Settings
-                  </DropdownMenuItem>
-
-                  <DropdownMenuSeparator className='bg-zinc-100' />
-
-                  <DropdownMenuItem
-                    onClick={handleSignout}
-                    className='text-[12px] uppercase tracking-widest cursor-pointer py-3 text-red-600 focus:bg-red-50 focus:text-red-700'
-                  >
-                    Sign Out
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+            <UserMenu userName={userName} userRole={userRole} onSignOut={handleSignout} />
           ) : (
             <div className='flex items-center gap-6'>
               <Link href='/signin' className='group relative'>
@@ -207,7 +135,6 @@ const Navbar = () => {
                   }`}
                 />
               </Link>
-
               <Link href='/signup'>
                 <Button
                   className={`px-8 py-5 text-xs uppercase tracking-widest transition-all duration-300 ${

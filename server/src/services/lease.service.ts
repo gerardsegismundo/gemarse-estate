@@ -1,7 +1,5 @@
 // services/lease.service.ts
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import { prisma } from '../lib/prisma'
 
 export const fetchLeases = async () => {
   return prisma.lease.findMany({
