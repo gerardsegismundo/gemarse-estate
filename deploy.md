@@ -16,6 +16,7 @@ aws cloudformation deploy \
 ```
 
 ### Save the CloudFormation outputs
+
 - `S3BucketName`
 - `CognitoUserPoolId`
 - `CognitoUserPoolClientId`
@@ -123,13 +124,13 @@ Deploy the backend to your chosen hosting service and ensure `NEXT_PUBLIC_API_BA
 
 ## 8) Output mapping
 
-| CloudFormation output | `.env` variable |
-| --- | --- |
-| `S3BucketName` | `S3_BUCKET_NAME` |
-| `CognitoUserPoolId` | `NEXT_PUBLIC_AWS_COGNITO_USER_POOL_ID` |
+| CloudFormation output     | `.env` variable                               |
+| ------------------------- | --------------------------------------------- |
+| `S3BucketName`            | `S3_BUCKET_NAME`                              |
+| `CognitoUserPoolId`       | `NEXT_PUBLIC_AWS_COGNITO_USER_POOL_ID`        |
 | `CognitoUserPoolClientId` | `NEXT_PUBLIC_AWS_COGNITO_USER_POOL_CLIENT_ID` |
-| `S3UploaderAccessKeyId` | `AWS_ACCESS_KEY_ID` |
-| IAM Secret Access Key | `AWS_SECRET_ACCESS_KEY` |
+| `S3UploaderAccessKeyId`   | `AWS_ACCESS_KEY_ID`                           |
+| IAM Secret Access Key     | `AWS_SECRET_ACCESS_KEY`                       |
 
 ## 9) Validate deployment
 
