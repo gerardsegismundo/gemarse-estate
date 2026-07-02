@@ -4,6 +4,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import routes from './routes'
+import { errorHandler, notFoundHandler } from './middleware/error.middleware'
 
 /* CONFIGURATIONS */
 dotenv.config()
@@ -18,6 +19,8 @@ app.use(express.urlencoded({ extended: false }))
 
 /* ROUTES */
 app.use('/', routes)
+app.use(notFoundHandler)
+app.use(errorHandler)
 
 /* SERVER START */
 const PORT = process.env.PORT ?? 8000

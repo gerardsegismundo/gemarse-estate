@@ -1,10 +1,10 @@
 // services/application.service.ts
 import { prisma } from '../lib/prisma'
 import { calculateNextPaymentDate } from '../helpers/application.helper'
-import { ApplicationStatus } from '@prisma/client'
+import { ApplicationStatus, Prisma } from '@prisma/client'
 
 export const listApplications = async (userId?: string, userType?: string) => {
-  let whereClause: any = {}
+  let whereClause: Prisma.ApplicationWhereInput = {}
 
   if (userId && userType) {
     if (userType === 'tenant') {
@@ -24,7 +24,7 @@ export const listApplications = async (userId?: string, userType?: string) => {
   })
 
   // Format applications with next payment date
-  return applications.map((app) => ({
+  return applications.map((app: typeof applications[number]) => ({
     ...app,
     lease: app.lease
       ? {
@@ -63,12 +63,12 @@ export const createApplication = async (data: {
 
   if (!property) throw new Error('Property not found')
 
-  return await prisma.$transaction(async (prisma) => {
+  return await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
     const startDate = new Date()
     const endDate = new Date(startDate)
     endDate.setFullYear(endDate.getFullYear() + 1)
 
-    const lease = await prisma.lease.create({
+    const lease = await tx.lease.create({
       data: {
         startDate,
         endDate,
@@ -79,7 +79,7 @@ export const createApplication = async (data: {
       },
     })
 
-    return await prisma.application.create({
+    return await tx.application.create({
       data: {
         applicationDate: new Date(applicationDate),
         status,

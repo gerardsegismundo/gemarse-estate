@@ -1,4 +1,5 @@
 // services/manager.service.ts
+import { Prisma } from '@prisma/client'
 import { prisma } from '../lib/prisma'
 import { fetchCoordinatesById } from '../utils/coordinates'
 
@@ -20,7 +21,7 @@ export const fetchManager = async (cognitoId: string) => {
 }
 
 export const createManager = async (data: ManagerCreateData) => {
-  const prismaData: any = {
+  const prismaData: Prisma.ManagerCreateInput = {
     cognitoId: data.cognitoId,
     name: data.name,
     email: data.email,
@@ -50,7 +51,7 @@ export const fetchManagerProperties = async (cognitoId: string) => {
   })
 
   const propertiesWithCoordinates = await Promise.all(
-    properties.map(async (property) => {
+    properties.map(async (property: (typeof properties)[number]) => {
       const { longitude, latitude } = await fetchCoordinatesById(property.location.id)
 
       return {

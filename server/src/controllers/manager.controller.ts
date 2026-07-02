@@ -1,29 +1,30 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import * as managerService from '../services/manager.service'
-import { handleError, handleNotFound, handleUnauthorized, handleConflict } from '../utils/error'
+import { AppError, asyncHandler } from '../middleware/error.middleware'
 
-export const getManager = async (req: Request, res: Response) => {
-  try {
+export const getManager = asyncHandler(
+  async (req: Request, res: Response, _next: NextFunction) => {
     const cognitoId = req.user?.id
-    if (!cognitoId) return handleUnauthorized(res, 'Unauthorized')
+    if (!cognitoId) throw new AppError(401, 'Unauthorized')
 
     const manager = await managerService.fetchManager(cognitoId)
-    if (!manager) return handleNotFound(res, 'Manager not found')
+    if (!manager) throw new AppError(404, 'Manager not found')
 
     res.json(manager)
-  } catch (error) {
-    handleError(res, error, 'Error retrieving manager: ')
   }
-}
+)
 
-export const createManager = async (
-  req: Request<{}, {}, managerService.ManagerCreateData>,
-  res: Response
-) => {
-  try {
+export const createManager = asyncHandler(
+  async (
+    req: Request<{}, {}, managerService.ManagerCreateData>,
+    res: Response,
+    _next: NextFunction
+  ) => {
     const { cognitoId, name, email, phoneNumber } = req.body
-    if (!cognitoId || !name || !email)
-      return res.status(400).json({ message: 'Missing required fields' })
+
+    if (!cognitoId || !name || !email) {
+      throw new AppError(400, 'Missing required fields')
+    }
 
     const manager = await managerService.createManager({
       cognitoId,
@@ -31,39 +32,34 @@ export const createManager = async (
       email,
       phoneNumber,
     })
-    res.status(201).json(manager)
-  } catch (error: any) {
-    if (error.code === 'P2002') return handleConflict(res, 'Manager already exists')
-    handleError(res, error, 'Error creating manager: ')
-  }
-}
 
-export const updateManager = async (
-  req: Request<{}, {}, managerService.ManagerUpdateData>,
-  res: Response
-) => {
-  try {
+    res.status(201).json(manager)
+  }
+)
+
+export const updateManager = asyncHandler(
+  async (
+    req: Request<{}, {}, managerService.ManagerUpdateData>,
+    res: Response,
+    _next: NextFunction
+  ) => {
     const cognitoId = req.user?.id
-    if (!cognitoId) return handleUnauthorized(res, 'Unauthorized')
+    if (!cognitoId) throw new AppError(401, 'Unauthorized')
 
     const existing = await managerService.fetchManager(cognitoId)
-    if (!existing) return handleNotFound(res, 'Manager not found')
+    if (!existing) throw new AppError(404, 'Manager not found')
 
     const updated = await managerService.updateManager(cognitoId, req.body)
     res.json(updated)
-  } catch (error) {
-    handleError(res, error, 'Error updating manager: ')
   }
-}
+)
 
-export const getManagerProperties = async (req: Request, res: Response) => {
-  try {
+export const getManagerProperties = asyncHandler(
+  async (req: Request, res: Response, _next: NextFunction) => {
     const cognitoId = req.user?.id
-    if (!cognitoId) return handleUnauthorized(res, 'Unauthorized')
+    if (!cognitoId) throw new AppError(401, 'Unauthorized')
 
     const properties = await managerService.fetchManagerProperties(cognitoId)
     res.json(properties)
-  } catch (error) {
-    handleError(res, error, 'Error retrieving properties: ')
   }
-}
+)
