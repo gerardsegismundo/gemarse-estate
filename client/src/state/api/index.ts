@@ -1,12 +1,12 @@
-export { baseApi } from './baseApi'
-export { authApi, useGetAuthUserQuery } from './authApi'
-export {
+import { baseApi } from './baseApi'
+import { authApi, useGetAuthUserQuery } from './authApi'
+import {
   propertyApi,
   useGetPropertiesQuery,
   useGetPropertyQuery,
   useCreatePropertyMutation,
 } from './propertyApi'
-export {
+import {
   tenantApi,
   useGetTenantQuery,
   useGetCurrentResidencesQuery,
@@ -14,12 +14,12 @@ export {
   useAddFavoritePropertyMutation,
   useRemoveFavoritePropertyMutation,
 } from './tenantApi'
-export {
+import {
   managerApi,
   useGetManagerPropertiesQuery,
   useUpdateManagerSettingsMutation,
 } from './managerApi'
-export {
+import {
   applicationApi,
   useGetLeasesQuery,
   useGetPropertyLeasesQuery,
@@ -28,5 +28,31 @@ export {
   useUpdateApplicationStatusMutation,
   useCreateApplicationMutation,
 } from './applicationApi'
+
+export {
+  baseApi,
+  authApi,
+  propertyApi,
+  tenantApi,
+  managerApi,
+  applicationApi,
+  useGetAuthUserQuery,
+  useGetPropertiesQuery,
+  useGetPropertyQuery,
+  useCreatePropertyMutation,
+  useGetTenantQuery,
+  useGetCurrentResidencesQuery,
+  useUpdateTenantSettingsMutation,
+  useAddFavoritePropertyMutation,
+  useRemoveFavoritePropertyMutation,
+  useGetManagerPropertiesQuery,
+  useUpdateManagerSettingsMutation,
+  useGetLeasesQuery,
+  useGetPropertyLeasesQuery,
+  useGetPaymentsQuery,
+  useGetApplicationsQuery,
+  useUpdateApplicationStatusMutation,
+  useCreateApplicationMutation,
+}
 
 export const api = baseApi
