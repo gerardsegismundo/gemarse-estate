@@ -1,223 +1,323 @@
-# Gemarse Estate 🏛️
+# 🏛️ Gemarse Estate
 
-**Live Demo:** [https://main.d2mesgux8km4a1.amplifyapp.com/](https://main.d2mesgux8km4a1.amplifyapp.com/)
+<p align="center">
+  <strong>A luxury real estate rental and property management platform.</strong><br>
+  <em>Designed with modern architecture, premium UI/UX, and enterprise-grade full-stack technologies.</em>
+</p>
 
-The Pinnacle of Modern Living — A full-stack, luxury real estate rental and management platform designed for seamless property discovery, management, and residency experience.
+<p align="center">
 
-Gemarse Estate combines minimalist, high-end design with robust functionality for both Tenants and Managers, providing an elegant, intuitive platform to browse, manage, and apply to rental properties.
+![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=nextdotjs)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+![Express.js](https://img.shields.io/badge/Express.js-API-000000?logo=express)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Prisma-336791?logo=postgresql)
+![AWS](https://img.shields.io/badge/AWS-Amplify%20%7C%20Cognito%20%7C%20S3-FF9900?logo=amazonaws)
+![Mapbox](https://img.shields.io/badge/Mapbox-Maps-000000?logo=mapbox)
+![Redux Toolkit](https://img.shields.io/badge/Redux-Toolkit-764ABC?logo=redux)
+![License](https://img.shields.io/badge/License-ISC-blue)
 
-## 📋 Overview
+</p>
 
-Gemarse Estate is built with a focus on luxury UI/UX, performance, and maintainable architecture. Tenants can discover and favorite properties with advanced search filters, while Managers can efficiently handle listings, applications, and unit assignments.
+<p align="center">
 
-The platform features a role-based access control system (RBAC) and a customized authentication flow, ensuring a seamless and secure experience for every user.
+### 🌐 Live Demo
+
+https://main.d2mesgux8km4a1.amplifyapp.com/
+
+</p>
+
+---
+
+<p align="center">
 
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/4cbd04df-ebcc-4f97-a0d8-a3f70fa82ada" />
 
-## 🚀 Tech Stack
+</p>
 
-### Frontend
+---
 
-- **Next.js 15** — React framework with App Router
-- **TypeScript** — Type safety across the app
-- **Tailwind CSS** — Utility-first styling
-- **Redux Toolkit & RTK Query** — State management and data fetching
-- **Shadcn UI & Radix Primitives** — Accessible, reusable components
-- **Lucide React** — Lightweight icons
-- **Framer Motion** — Smooth animations
-- **Mapbox GL** — Interactive property maps
+## ✨ Highlights
 
-### Backend
+- 🏡 Luxury real estate rental platform
+- 🗺️ Interactive Mapbox property search
+- 🔐 Secure authentication with AWS Cognito
+- 👥 Role-Based Access Control (RBAC)
+- ❤️ Favorites & rental applications
+- 🏢 Property management dashboard
+- 📱 Fully responsive across devices
+- ☁️ AWS cloud integration
+- ⚡ Built with Next.js 15 & Express.js
 
-- **Express.js** — API server
-- **PostgreSQL** — Relational database
-- **Prisma** — ORM for database interactions
-- **AWS S3** — File storage for property images
-- **AWS Amplify Auth (Cognito)** — Authentication and user management
-- **JWT** — Secure API authentication
+---
 
-## ✨ Key Features
+# 📖 About the Project
 
-### For Tenants
+Gemarse Estate is a full-stack luxury real estate rental platform built to demonstrate modern web application architecture while delivering a premium user experience.
 
-- **Property Discovery**: Browse high-end listings with filters by location, price, size, and amenities
-- **Favorites**: Save properties for later
-- **Application System**: Apply to properties directly via the platform
-- **Profile Management**: Manage personal information and rental history
-- **Responsive Design**: Optimized for desktop and mobile
+The platform provides an elegant experience for **Tenants** searching for rental properties and **Property Managers** managing listings, applications, and residents.
 
-### For Managers
+Beyond showcasing beautiful UI/UX, the project emphasizes scalable architecture, cloud integration, secure authentication, interactive mapping, and maintainable code organization.
 
-- **Dashboard**: Overview of properties, applications, and tenants
-- **Property Management**: Create, update, and remove listings
-- **Application Tracking**: Approve or reject tenant applications
-- **Role-Based Access**: Manage user permissions for staff and tenants
+---
 
-### Luxury UI/UX
+# 🚀 Features
 
-- Minimalist design with high-contrast serif typography (Didot/Bodoni inspired)
-- Smooth animations and transitions
-- Dynamic navigation that adapts to scrolling and context
-- Custom-branded authentication experience
+## 🏡 Property Discovery
 
-## 🏗️ Prerequisites
+- Interactive Mapbox property search
+- Advanced filtering by location, price, size, and amenities
+- Luxury property listings
+- Responsive browsing experience
+
+---
+
+## ❤️ Tenant Experience
+
+- Save favorite properties
+- Submit rental applications
+- Manage profile information
+- Track rental history
+
+---
+
+## 🏢 Property Management
+
+- Create, edit, and delete property listings
+- Review tenant applications
+- Manage tenants and property assignments
+- Dashboard overview
+
+---
+
+## 🔐 Authentication & Security
+
+- AWS Cognito Authentication
+- JWT Authorization
+- Role-Based Access Control (RBAC)
+- Protected routes
+- Secure API endpoints
+
+---
+
+# 🏗 Architecture
+
+```text
+                     Next.js Client
+                           │
+                   RTK Query / REST API
+                           │
+                    Express.js Server
+                           │
+          ┌────────────────┴────────────────┐
+          │                                 │
+     PostgreSQL (Prisma)              AWS Services
+                                      ├── Cognito
+                                      └── S3
+```
+
+---
+
+# 🛠 Tech Stack
+
+| Frontend | Backend | Cloud & Services |
+|-----------|----------|------------------|
+| Next.js 15 | Express.js | AWS Amplify |
+| TypeScript | PostgreSQL | AWS Cognito |
+| Tailwind CSS | Prisma ORM | AWS S3 |
+| Redux Toolkit | JWT Authentication | Mapbox |
+| RTK Query | REST API | |
+| Shadcn UI | | |
+| Framer Motion | | |
+
+---
+
+# 📸 Screenshots
+
+## Landing Page
+
+<img src="LANDING_SCREENSHOT_HERE" width="100%">
+
+---
+
+## Property Search
+
+<img src="SEARCH_SCREENSHOT_HERE" width="100%">
+
+---
+
+## Dashboard
+
+<img src="DASHBOARD_SCREENSHOT_HERE" width="100%">
+
+---
+
+## Authentication
+
+<img src="AUTH_SCREENSHOT_HERE" width="100%">
+
+---
+
+# 🎯 Why I Built This
+
+Gemarse Estate was built to simulate a production-ready real estate platform while demonstrating modern full-stack development practices.
+
+The project focuses on:
+
+- Premium UI/UX design
+- Enterprise-style architecture
+- Secure authentication
+- Cloud integration with AWS
+- Interactive map experiences
+- Responsive design
+- Scalable backend architecture
+
+---
+
+# ⚡ Getting Started
+
+## Prerequisites
 
 - Node.js 18+
-- PostgreSQL database
-- AWS Account (Cognito, S3)
-- Mapbox API key
+- PostgreSQL
+- AWS Account (Cognito & S3)
+- Mapbox API Key
 
-## ⚡ Installation
+---
 
-Clone the repository:
+## Installation
+
+Clone the repository.
 
 ```bash
 git clone https://github.com/gerardsegismundo/gemarse-estate.git
+
 cd gemarse-estate
 ```
 
-Install dependencies:
+Install dependencies.
 
 ```bash
-# Root dependencies
 npm install
 
-# Frontend dependencies
-cd client && npm install
+cd client
+npm install
 
-# Backend dependencies
-cd ../server && npm install
+cd ../server
+npm install
 ```
 
-Set up environment variables:
+---
 
-**client/.env:**
+## Environment Variables
+
+### Client
 
 ```env
 NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
 NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=your_mapbox_token
 ```
 
-**server/.env:**
+### Server
 
 ```env
 PORT=8000
-JWT_SECRET=your_jwt_secret
-DATABASE_URL=postgresql://user:password@localhost:5432/yourdb
+
+DATABASE_URL=postgresql://...
+
+JWT_SECRET=your_secret
+
 AWS_REGION=us-west-2
-AWS_ACCESS_KEY_ID=your_aws_key
-AWS_SECRET_ACCESS_KEY=your_aws_secret
-S3_BUCKET_NAME=your_s3_bucket
+AWS_ACCESS_KEY_ID=...
+AWS_SECRET_ACCESS_KEY=...
+
+S3_BUCKET_NAME=...
 ```
 
-Initialize the database:
+---
+
+## Database
 
 ```bash
 cd server
+
 npx prisma migrate dev
+
 npx prisma db seed
 ```
 
-## 🖥️ Running the Application
+---
 
-### Development Mode
+## Run the Application
 
-Run both client and server concurrently:
+Development mode.
 
 ```bash
 npm run dev
 ```
 
-Or separately:
+Or separately.
 
 ```bash
-# Terminal 1 - Server
-npm run dev:server
-
-# Terminal 2 - Client
 npm run dev:client
+
+npm run dev:server
 ```
 
-- **Client:** http://localhost:3000
-- **Server:** http://localhost:8000
-
-### Production Build
-
-```bash
-npm run build
-npm run start
-```
-
-## 🗂️ Project Structure
+Client
 
 ```
-├── client/                 # Next.js frontend
-│   ├── src/
-│   │   ├── app/           # App router pages
-│   │   │   ├── (auth)/   # Authentication
-│   │   │   ├── (dashboard)/ # Manager & Tenant dashboards
-│   │   │   ├── (nondashboard)/ # Landing & public pages
-│   │   │   └── search/   # Property search
-│   │   ├── components/   # Reusable components
-│   │   ├── hooks/        # Custom React hooks
-│   │   ├── lib/          # Utilities & helpers
-│   │   ├── state/        # Redux store & slices
-│   │   └── types/        # TypeScript types
-│   └── public/           # Static assets
+http://localhost:3000
+```
+
+Server
+
+```
+http://localhost:8000
+```
+
+---
+
+# 📁 Project Structure
+
+```text
+client/
 │
-├── server/                # Express backend
-│   ├── src/
-│   │   ├── controllers/  # Route handlers
-│   │   ├── middleware/   # Auth & other middleware
-│   │   ├── routes/       # API endpoints
-│   │   └── services/     # Business logic
-│   └── prisma/           # Database schema
+├── src/
+│   ├── app/
+│   ├── components/
+│   ├── hooks/
+│   ├── lib/
+│   ├── state/
+│   └── types/
 │
-└── package.json          # Root scripts
+└── public/
+
+server/
+│
+├── src/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── routes/
+│   ├── services/
+│   └── prisma/
 ```
 
-## 📡 API Endpoints
+---
 
-### Properties
+# 📡 API Overview
 
-| Method | Endpoint          | Description                    |
-| ------ | ----------------- | ------------------------------ |
-| GET    | `/properties`     | List all properties            |
-| GET    | `/properties/:id` | Get property details           |
-| POST   | `/properties`     | Create property (Manager only) |
+| Endpoint | Description |
+|-----------|-------------|
+| GET /properties | Retrieve properties |
+| POST /properties | Create listing |
+| GET /applications | View applications |
+| POST /applications | Submit application |
+| PUT /applications/:id/status | Update application |
+| GET /tenants/:id | Tenant profile |
+| GET /managers/:id | Manager profile |
 
-### Applications
+---
 
-| Method | Endpoint                   | Description                  |
-| ------ | -------------------------- | ---------------------------- |
-| GET    | `/applications`            | List applications            |
-| POST   | `/applications`            | Submit application           |
-| PUT    | `/applications/:id/status` | Update status (Manager only) |
+# 📜 License
 
-### Tenants
-
-| Method | Endpoint                             | Description            |
-| ------ | ------------------------------------ | ---------------------- |
-| GET    | `/tenants/:id`                       | Get tenant profile     |
-| PUT    | `/tenants/:id`                       | Update tenant settings |
-| POST   | `/tenants/:id/favorites/:propertyId` | Add favorite           |
-
-### Managers
-
-| Method | Endpoint                   | Description              |
-| ------ | -------------------------- | ------------------------ |
-| GET    | `/managers/:id`            | Get manager profile      |
-| GET    | `/managers/:id/properties` | Get manager's properties |
-
-## 🛠️ Scripts
-
-| Script          | Description                          |
-| --------------- | ------------------------------------ |
-| `npm run dev`   | Start client & server in development |
-| `npm run build` | Build production client              |
-| `npm run start` | Start production server              |
-| `npm run seed`  | Seed the database                    |
-
-## 📜 License
-
-ISC
+Licensed under the ISC License.
