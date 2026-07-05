@@ -66,7 +66,6 @@ Beyond showcasing beautiful UI/UX, the project emphasizes scalable architecture,
 
 - Interactive Mapbox property search
 - Advanced filtering by location, price, size, and amenities
-- Luxury property listings
 - Responsive browsing experience
 
 ---
@@ -131,31 +130,6 @@ Beyond showcasing beautiful UI/UX, the project emphasizes scalable architecture,
 
 ---
 
-# 📸 Screenshots
-
-## Landing Page
-
-<img src="LANDING_SCREENSHOT_HERE" width="100%">
-
----
-
-## Property Search
-
-<img src="SEARCH_SCREENSHOT_HERE" width="100%">
-
----
-
-## Dashboard
-
-<img src="DASHBOARD_SCREENSHOT_HERE" width="100%">
-
----
-
-## Authentication
-
-<img src="AUTH_SCREENSHOT_HERE" width="100%">
-
----
 
 # 🎯 Why I Built This
 
